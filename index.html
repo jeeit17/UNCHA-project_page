@@ -10,28 +10,38 @@
   <!-- End Google Tag Manager -->
 
   <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({            
-        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
     });
   </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
   <meta charset="utf-8">
-  <meta name="description"
-        content="Uncertainty-guided Compositional Alignment with Part-to-Whole Semantic Representativeness in Hyperbolic Vision-Language Models">
-  <meta name="keywords" content="Affordance grounding, Weak supervision, Exocentric image, Contrastive learning, Interaction relation">
+  <meta name="description" content="UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment with Part-to-Whole Semantic Representativeness">
+  <meta name="keywords" content="Hyperbolic VLM, Vision-Language Model, Compositional alignment, Uncertainty, Contrastive learning, Zero-shot classification">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Uncertainty-guided Compositional Alignment with Part-to-Whole Semantic Representativeness in Hyperbolic Vision-Language Models</title>
+  <title>UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment</title>
+
   <style>
     .logo {
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 33%; /* Adjust the size as needed */
+      width: 33%;
     }
     .colored-section {
-      background-color: #F8F8F8; /* Replace with your desired color code or name */
-      padding: 20px; /* Optional: Add padding for better spacing */
+      background-color: #F8F8F8;
+      padding: 20px;
+    }
+    .centered-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .interpolation-image {
+      display: block;
+      margin: 20px 0;
     }
   </style>
 
@@ -40,15 +50,12 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/logo.png">
 
@@ -59,6 +66,7 @@
   <script src="./static/js/index.js"></script>
 </head>
 <body>
+
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -70,379 +78,262 @@
     <div class="navbar-menu">
       <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
         <a class="navbar-item" href="https://github.com/jeeit17">
-        <span class="icon">
+          <span class="icon">
             <i class="fas fa-home"></i>
-        </span>
+          </span>
         </a>
       </div>
     </div>
   </nav>
-  <img src="./static/images/title.png" alt="Project Logo" class="logo">
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">INTRA: Interaction Relationship-aware Weakly Supervised Affordance Grounding</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://janeyeon.github.io">Hayeon Kim</a><sup>1*</sup>,</span>
-            <span class="author-block">
-              <a href="https://jeeit17.github.io">Ji Ha Jang</a><sup>1*</sup>,</span>
-            <span class="author-block">
-              <a href="https://www.linkedin.com/in/james-hun-kim-a4682b106/">Junghun James Kim</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://icl.snu.ac.kr/pi">Se Young Chun</a><sup>1,2</sup>,
-            </span>
-          </div>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Dept. of Electrical and Computer Engineering</span>
-            <span class="author-block"><sup>2</sup>INMC & IPAI</span>
-            <span class="author-block"><sup>*</sup>These authors contributed equally to this work</span>
-            <h2 class>Seoul National University, Republic of Korea</h2>
-            <h1 class> <b>CVPR 2026</b> </h1>
-          </div>
+  <img src="./static/images/title.png" alt="UNCHA Project Logo" class="logo">
 
+  <!-- ===== Hero / Title ===== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
           <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="http://arxiv.org/abs/2409.06210"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://youtu.be/lzBVToI9D-0?si=7J76gfGhnf2PTUFq"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
+            <h1 class="title is-1 publication-title">UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment with Part-to-Whole Semantic Representativeness</h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://janeyeon.github.io">Hayeon Kim</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="https://jeeit17.github.io">Ji Ha Jang</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/james-hun-kim-a4682b106/">Junghun James Kim</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://icl.snu.ac.kr/pi">Se Young Chun</a><sup>1,2</sup>
               </span>
             </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Dept. of Electrical and Computer Engineering,</span>
+              <span class="author-block"><sup>2</sup>INMC &amp; IPAI</span>
+              <br>
+              <span class="author-block"><sup>*</sup>These authors contributed equally to this work</span>
+              <h2>Seoul National University, Republic of Korea</h2>
+              <h1><b>CVPR 2026</b></h1>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://github.com/jeeit17/UNCHA"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- TODO: 링크 추가 후 href 업데이트 -->
+                <span class="link-block">
+                  <a href="#"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-youtube"></i></span>
+                    <span>Video</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img src="./static/images/result_intra.gif">
-      <div class="columns is-vcentered is-centered">
-      <p style="text-align:justify">
-        We present INTRA, a novel approach to weakly supervised affordance grounding by framing the task as a representation learning problem. 
-        INTRA surpasses previous state-of-the-art methods in weakly supervised affordance grounding on diverse datasets such as AGD20K, IIT-AFF, CAD, and UMD, demonstrating superior performance both qualitatively and quantitatively.
-      </p>
-    </div>
-  </div>
-  </div>
-</section>
-
-
-<section class="colored-section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-          While Vision-Language Models (VLMs) have achieved remarkable performance, their Euclidean embeddings remain limited in capturing hierarchical relationships such as part-to-whole or parent-child structures, and often face challenges in multi-object compositional scenarios. Hyperbolic VLMs mitigate this issue by better preserving hierarchical structures and modeling part-whole relations (\textit{i.e.}, whole scene and its part images) through entailment. However, existing approaches do not model that each part has a different level of semantic representativeness to the whole. 
-          </p>
-          <p>
-            We propose UNcertainty-guided Compositional Hyperbolic Alignment (UNCHA) for enhancing hyperbolic VLMs. UNCHA models part-to-whole semantic representativeness with hyperbolic uncertainty, by assigning lower uncertainty to more representative parts and higher uncertainty to less representative ones for the whole scene. This representativeness is then incorporated into the contrastive objective with uncertainty-guided weights. Finally, the uncertainty is further calibrated with an entailment loss regularized by entropy-based term. With the proposed losses, UNCHA learns hyperbolic embeddings with more accurate part-whole ordering, capturing the underlying compositional structure in an image and improving its understanding of complex multi-object scenes. UNCHA achieves state-of-the-art performance on zero-shot classification, retrieval, and multi-label classification benchmarks. Our code and models are available at:https://github.com/jeeit17/UNCHA.git.
-          </p>
-         
-        </div>
-        </p>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-</section>
-<section class="section"></section>
-  <div class="container is-max-widescreen">
-
-    <div class="rows">
-
-<style>
-  .centered-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .interpolation-image {
-    display: block;
-    margin: 20px 0;  /* Give some space above and below the image */
-  }
-</style>
-<!-- <section class="section">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/lzBVToI9D-0?si=gaOxAolQc86zKy1v"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-</section> -->
-
-<section>
-  <div class="rows">
-    <div class="row is-full-width">
-      <h2 class="title is-3">Motivation</h2>
-      <div class="columns is-vcentered is-centered">
-        <br>
-        <img src="./static/images/motivation.png" class="interpolation-image"alt="Motivation"
-         style="width: 80%;" />
-      </div>
-      <p style="text-align:justify">
-        Recent advances in weakly supervised affordance grounding have shown strong performance by using pairs of exocentric and egocentric images, allowing deep neural networks to learn affordances by focusing on object parts involved in interactions. However, challenges remain. The reliance on image pairs for weak labels is still strong, despite humans not needing egocentric images for learning. Additionally, complex relationships between interactions, such as many-to-many associations or interactions that overlap (e.g., "sip" often includes "hold"), have not been fully addressed, making it difficult to accurately extract interaction-relevant features and leading to biases in affordance grounding.
-        </p>
-        <br><br>
-    </div>
-  </div>
-</section>
-
-      <br><br>
-
-<section>
-  <div class="rows">
-    <div class="row is-full-width">
-      <h2 class="title is-3">Method</h2>
-      <div class="columns is-vcentered is-centered">
-        <br>
-        <img src="./static/images/INTRA_method.png" class="interpolation-image" alt="overall pipeline"
-          style="width: 80%;" />
-      </div>
-      <p style="text-align:justify">
-        Overall frameworks of (a) LOCATE and (b) INTRA (Ours). 
-        LOCATE takes paired exocentric and egocentric images to generate interaction-aware affordance maps (CAMs) for predefined interactions and then selects an interaction-related CAM by the given interaction label. 
-        In contrast, INTRA takes only exocentric images and interaction labels to yield an affordance map through our affordance map generation module. 
-        Training is done via interaction relationship-guided contrastive learning on exocentric features from affordance maps. 
-        Note that all encoder parameters are frozen. </p>
-        <br><br>
+  <!-- ===== Teaser ===== -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img src="./static/images/motivation_fig.png" alt="UNCHA overview figure">
         <div class="columns is-vcentered is-centered">
-          <br>
-          <img src="./static/images/INTRA_realtionshipmap.png" class="interpolation-image" alt="relationship map generation"
-            style="width: 80%;" />
+          <p style="text-align:justify">
+            We present UNCHA, a novel framework for hyperbolic vision-language models that captures part-to-whole semantic representativeness via uncertainty-guided alignment.
+            UNCHA improves hierarchical compositional understanding and achieves state-of-the-art performance on zero-shot classification, retrieval, and multi-label classification benchmarks.
+          </p>
         </div>
-        <p style="text-align:justify">
-          The overall scheme of interaction-relationship map ($\mathcal{R}$) generation. 
-          LLM classifies all pairs of interactions in the dataset as positive or negative through chain of thoughts. 
-          This process is based on reasoning if interactions occur on same object parts. </p>
-          <br><br>
-    </div>
-  </div>
-</section>
-
-      <br><br>
-
-<section>
-  <div class="rows">
-    <div class="row is-full-width">
-      <h2 class="title is-3">Discussion</h2>
-      <div class="columns is-vcentered is-centered">
-        <br>
-        <img src="./static/images/tsne_intra.gif" class="interpolation-image" alt="overall pipeline"
-          style="width: 80%;" />
       </div>
-        <p style="text-align:justify">
-          (a) Our rationale for learning affordance grounding solely with exocentric images relies on the consistent presence of humans within these images. 
-          By repelling common features of negative pairs, such as human parts, the images effectively exclude irrelevant elements. 
-          Conversely, positive pairs, sharing the desired feature of the object—specifically, the rim of the object near the face—facilitate learning by attracting these relevant features. </p>
-        <p style="text-align:justify">
-          (b) To visualize the effectiveness of our loss in learning interaction-relevant features in similar images, we examine the feature distributions of "Hold" and "Sip" a wine glass, involving distinct affordances. 
-          Prior to training, these distributions overlap. However, after training with our loss function, the feature distribution for "Hold wine glass" aligns more closely with "Hold baseball bat" than with "Sip wine glass". This indicates that our loss function effectively discriminates between the characteristics of different interactions without exhibiting bias towards objects. </p>
-          <br><br>
     </div>
-  </div>
-</section>
+  </section>
 
-      <br><br>
-
-<section>
-  <div class="rows">
-    <div class="row is-full-width">
-      <h2 class="title is-3">Results</h2>
-      <h3 class="title is-4">Quantitative Results</h3>
-      <div class="columns is-vcentered is-centered">
-        <br>
-        <img src="./static/images/INTRA_table1.png" class="interpolation-image" alt="quantitative results1"
-          style="width: 80%;" />
-      </div>
-      <p style="text-align:justify">
-        Quantitative results of ours and other baselines on the AGD20K dataset. 
-        $\uparrow$ / $\downarrow$ indicates that higher / lower the metric is, the better the model performs. 
-        INTRA outperformed all baselines, despite being trained only with exocentric images, whereas other models incorporated both exocentric and egocentric images during training. </p>
-        <br><br>
-        <div class="columns is-vcentered is-centered">
-          <br>
-          <img src="./static/images/INTRA_table2.png" class="interpolation-image" alt="overall pipeline"
-            style="width: 80%;" />
+  <!-- ===== Abstract ===== -->
+  <section class="colored-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              While Vision-Language Models (VLMs) have achieved remarkable performance, their Euclidean embeddings remain limited in capturing hierarchical relationships such as part-to-whole or parent-child structures, and often face challenges in multi-object compositional scenarios.
+              Hyperbolic VLMs mitigate this issue by better preserving hierarchical structures and modeling part-whole relations (<i>i.e.</i>, whole scene and its part images) through entailment.
+              However, existing approaches do not model that each part has a different level of semantic representativeness to the whole.
+            </p>
+            <p>
+              We propose <b>UN</b>certainty-guided <b>C</b>ompositional <b>H</b>yperbolic <b>A</b>lignment (UNCHA) for enhancing hyperbolic VLMs.
+              UNCHA models part-to-whole semantic representativeness with hyperbolic uncertainty, by assigning lower uncertainty to more representative parts and higher uncertainty to less representative ones for the whole scene.
+              This representativeness is then incorporated into the contrastive objective with uncertainty-guided weights.
+              Finally, the uncertainty is further calibrated with an entailment loss regularized by an entropy-based term.
+              With the proposed losses, UNCHA learns hyperbolic embeddings with more accurate part-whole ordering, capturing the underlying compositional structure in an image and improving its understanding of complex multi-object scenes.
+              UNCHA achieves state-of-the-art performance on zero-shot classification, retrieval, and multi-label classification benchmarks.
+              Our code and models are available at: <a href="https://github.com/jeeit17/UNCHA">https://github.com/jeeit17/UNCHA</a>.
+            </p>
+          </div>
         </div>
-        <p style="text-align:justify">
-          Quantitative results on the modified IIT-AFF, CAD, and UMD dataset for our method and other baselines. 
-          Models were trained in the 'Seen' setting of AGD20K and tested on the datasets without additional training. 
-          INTRA outperformed all baselines on all metrics across all datasets.
-          * Objects with affordances that prior works are unable to predict were eliminated from the datasets for fairness, wheares our method can infer affordances on novel interactions. </p>
-          <br><br>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Motivation ===== -->
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="rows">
+        <div class="row is-full-width">
+          <h2 class="title is-3">Motivation</h2>
           <div class="columns is-vcentered is-centered">
-            <br>
-            <img src="./static/images/INTRA_table3.png" class="interpolation-image" alt="User study"
-              style="width: 80%;" />
+            <img src="./static/images/motivation.png" class="interpolation-image" alt="Motivation" style="width: 80%;">
           </div>
           <p style="text-align:justify">
-            The result of user study on validity, finesse, and separability. Users were asked to score a 5-point scale, and we averaged it for mean opinion score (MOS).
-          </p>
-            <br><br>
-            <h3 class="title is-4">Qualitative Results</h3>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/INTRA_qual1.png" class="interpolation-image" alt="quantitative results1"
-                style="width: 80%;" />
-            </div>
-            <p style="text-align:justify">
-              Prior works on weakly-supervised affordance grounding like LOCATE often failed to ground different affordances for the same object. 
-              However, our proposed INTRA yielded finer and more accurate grounding results for them that are closer to the ground truth (GT) by considering interaction relationship among them. </p>
-              <br><br>
-              <div class="columns is-vcentered is-centered">
-                <br>
-                <img src="./static/images/INTRA_qual2.png" class="interpolation-image" alt="quantitative results1"
-                  style="width: 80%;" />
-              </div>
-              <p style="text-align:justify">
-                Qualitative results of INTRA (Ours) and baseline models on grounding affordances of multiple potential interactions on a single object. 
-                INTRA precisely localizes relevant interaction spots for each interaction. 
-                For example, with a knife, it grounds the handle for "Hold" and the blade for "Cut with". 
-                For a motorcycle, it accurately grounds the saddle for "Sit on". Additionally, for "Ride", it grounds both the handle and saddle, slightly deviating from the GT but still producing reasonable results, as we usually interacts with handle and saddle to "Ride" a motorcycle.    
-              </p>
-                <br><br>
-                <div class="columns is-vcentered is-centered">
-                <br>
-                  <img src="./static/images/INTRA_qual3.png" class="interpolation-image" alt="quantitative results1"
-                    style="width: 80%;" />
-                </div>
-                <p style="text-align:justify">
-                  Qualitative results comparison between our approach and other baselines. 
-                  Our approach, INTRA, demonstrates superior precision and detail in grounding affordances compared to the baselines. 
-                  For instance, in the example of "Drag", while baselines either fail to localize the handle or erroneously ground several other parts, INTRA accurately identifies and grounds the handle of a suitcase with finesse.
-                </p>
-                  <br><br>
-  </div>
-  </div>
-</section>
-
-      <br><br>
-
-<section>
-  <div class="rows">
-    <div class="row is-full-width">
-      <h2 class="title is-3">Feasibility study</h2>
-      <div class="columns is-vcentered is-centered">
-        <br>
-        <img src="./static/images/INTRA_feasibility.png" class="interpolation-image"alt="Motivation"
-          style="width: 80%;" />
-      </div>
-      <p style="text-align:justify">
-        Feasibility study on ability to ground (a) images with large domain gap, (b) images with novel objects, (c) text input of novel interaction was conducted to LOCATE and INTRA.</p>
-        <br><br>
-    </div>
-  </div>
-</section>
-
-      <br><br>
-
-<section>
-<div class="rows">
-  <div class="row is-full-width">
-    <h2 class="title is-3">Ablation Study</h2>
-    <h3 class="title is-4">Ablation study on loss design</h3>
-    <div class="columns is-vcentered is-centered">
-      <br>
-      <img src="./static/images/INTRA_abla1.png" class="interpolation-image" alt="quantitative results1"
-        style="width: 80%;" />
-    </div>
-    <p style="text-align:justify">
-    Quantitative results of ablation study on our loss design. 
-    We incrementally added each component of the losses to examine their impact. </p>
-      <br><br>
-    <h3 class="title is-4">Ablation study on adoption of LLM</h3>
-      <div class="columns is-vcentered is-centered">
-        <br>
-        <img src="./static/images/INTRA_abla2.png" class="interpolation-image" alt="overall pipeline"
-          style="width: 80%;" />
-      </div>
-      <p style="text-align:justify">
-        Quantitative results of ablation study on different $\mathcal{R}$.  
-        $\mathcal{L}_{WordNet}$, $\mathcal{L}_{Word2Vec}$ are calculated using word similarity from WordNet, Word2Vec, respectively. 
-        $\mathcal{L}_{Co-occur.}$ used co-occurrence probability in GloVe.
-        <br><br>
-        
-  </div>
-  </div>
-</section>
-      
-      <br><br>
- 
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{jang2024INTRA,
-  author    = {Jang, Ji Ha and Seo, Hoigi and Chun, Se Young},
-  title     = {INTRA: Interaction Relationship-aware Weakly Supervised Affordance Grounding},
-  journal   = {ECCV},
-  year      = {2024},
-}</code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/INTRA.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/jeeit17" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            The website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
-            If using this template, please provide a link back to their website.
+            Not all parts equally represent the whole scene. Treating them uniformly overlooks semantic representativeness and leads to suboptimal alignment.
           </p>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <!-- ===== Method ===== -->
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="rows">
+        <div class="row is-full-width">
+          <h2 class="title is-3">Method</h2>
+          <div class="columns is-vcentered is-centered">
+            <img src="./static/images/uncha_method.png" class="interpolation-image" alt="UNCHA method overview" style="width: 80%;">
+          </div>
+          <p style="text-align:justify">
+            Motivated by the fact that not all parts equally represent the whole scene, UNCHA models semantic representativeness through uncertainty.
+            By weighting parts accordingly, it achieves more accurate part-to-whole alignment and improved compositional understanding.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Results ===== -->
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="rows">
+        <div class="row is-full-width">
+          <h2 class="title is-3">Results</h2>
+
+          <!-- Table 1: Zero-shot classification -->
+          <div class="columns is-vcentered is-centered">
+            <img src="./static/images/quanti_table_1.png" class="interpolation-image" alt="Zero-shot classification results" style="width: 80%;">
+          </div>
+          <p style="text-align:justify">
+            Quantitative results of zero-shot image classification.
+            UNCHA (Ours) consistently demonstrates strong performance across both architectures. Bold numbers indicate the best performance within each architecture, and $\dagger$ denotes ATMG trained on GRIT.
+          </p>
+          <br><br>
+
+          <!-- Table 2: Retrieval & hierarchical -->
+          <div class="columns is-vcentered is-centered">
+            <img src="./static/images/quanti_table_2.png" class="interpolation-image" alt="Zero-shot retrieval and hierarchical classification results" style="width: 80%;">
+          </div>
+          <p style="text-align:justify">
+            Quantitative results on zero-shot retrieval and hierarchical classification benchmarks. UNCHA (Ours) consistently outperforms prior methods across both retrieval and hierarchical metrics, demonstrating the effectiveness of uncertainty-aware hyperbolic alignment.
+          </p>
+          <br><br>
+
+          <!-- Table 3: Multi-label -->
+          <div class="columns is-vcentered is-centered">
+            <img src="./static/images/quanti_table_3.png" class="interpolation-image" alt="Multi-label classification results" style="width: 80%;">
+          </div>
+          <p style="text-align:justify">
+            Quantitative results on multi-object representation and multi-label classification. UNCHA (Ours) consistently achieves higher mAP across varying object configurations and datasets, demonstrating its effectiveness in compositional multi-object understanding.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Analysis ===== -->
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="rows">
+        <div class="row is-full-width">
+          <h2 class="title is-3">Analysis</h2>
+
+          <div class="columns is-vcentered is-centered">
+            <img src="./static/images/analysis.png" class="interpolation-image" alt="Uncertainty modeling analysis" style="width: 80%;">
+          </div>
+          <p style="text-align:justify">
+            Analysis of uncertainty modeling.
+            (a) Part images are sorted by uncertainty (low to high), where more semantically representative parts exhibit lower uncertainty, while less informative or blurred parts show higher uncertainty.
+            (b) On an ImageNet subset, part-to-whole similarity shows a strong negative correlation with uncertainty ($r = -0.739$), indicating that less representative parts are assigned higher uncertainty.
+          </p>
+          <br><br>
+
+          <div class="columns is-vcentered is-centered">
+            <img src="./static/images/analysis2.png" class="interpolation-image" alt="Embedding distribution analysis" style="width: 80%;">
+          </div>
+          <p style="text-align:justify">
+            (a) UNCHA distributes hyperbolic embeddings farther from the origin than HyCoCLIP, enabling more effective use of the hyperbolic space.
+            (b) UNCHA exhibits a more dispersed and structured embedding norm distribution compared to HyCoCLIP, indicating richer space utilization.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BibTeX ===== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{kim2026uncha,
+  author    = {Kim, Hayeon and Jang, Ji Ha and Kim, Junghun James and Chun, Se Young},
+  title     = {UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment with Part-to-Whole Semantic Representativeness},
+  booktitle = {CVPR},
+  year      = {2026},
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://github.com/jeeit17/UNCHA">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              The website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+              If using this template, please provide a link back to their website.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
