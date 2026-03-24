@@ -23,25 +23,201 @@
   <title>UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment</title>
 
   <style>
+    :root {
+      --accent: #2563EB;
+      --accent-light: #DBEAFE;
+      --accent-dark: #1E40AF;
+      --text-primary: #1a1a2e;
+      --text-body: #374151;
+      --bg-section: #F4F7FB;
+      --bg-white: #FFFFFF;
+      --border-subtle: #E5E7EB;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: 'Noto Sans', 'Google Sans', sans-serif;
+      color: var(--text-body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Typography ── */
+    .publication-title {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      font-weight: 700 !important;
+      color: var(--text-primary) !important;
+      letter-spacing: -0.02em;
+      line-height: 1.25 !important;
+    }
+
+    .publication-authors {
+      color: var(--text-body);
+    }
+    .publication-authors a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .publication-authors a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── CVPR ── */
+    .venue-text {
+      display: block;
+      margin-top: 10px;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Link Buttons ── */
+    .publication-links .button.is-dark {
+      background: var(--text-primary);
+      border: none;
+      font-weight: 600;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .publication-links .button.is-dark:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ── Section Styling ── */
+    .section {
+      padding: 3.5rem 1.5rem;
+    }
+
+    .colored-section {
+      background-color: var(--bg-section);
+      padding: 3.5rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .title.is-3 {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem !important;
+    }
+
+    /* ── Body Text — 본문 크기 키움 ── */
+    .body-text {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: var(--text-body);
+      text-align: justify;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .abstract-text p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text-body);
+    }
+
+    /* ── Images ── */
+    .interpolation-image {
+      display: block;
+      margin: 24px auto;
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ── Result Card ── */
+    .result-card {
+      background: var(--bg-white);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-subtle);
+    }
+    .result-card .interpolation-image {
+      box-shadow: none;
+    }
+
+    /* ── Analysis Block — 간격 넓힘 ── */
+    .analysis-block {
+      background: var(--bg-white);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-subtle);
+    }
+    .analysis-block:last-child {
+      margin-bottom: 0;
+    }
+    .analysis-block .interpolation-image {
+      box-shadow: none;
+    }
+
+    /* ── Teaser ── */
+    .teaser-text {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: var(--text-body);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ── BibTeX ── */
+    #BibTeX pre {
+      background: #1a1a2e;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 1.5rem;
+      font-size: 0.92rem;
+      overflow-x: auto;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--bg-section);
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem 1.5rem 2rem;
+    }
+
+    /* ── Logo ── */
     .logo {
       display: block;
       margin-left: auto;
       margin-right: auto;
       width: 33%;
     }
-    .colored-section {
-      background-color: #F8F8F8;
-      padding: 20px;
-    }
+
     .centered-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
-    .interpolation-image {
-      display: block;
-      margin: 20px 0;
+
+    /* ── Smooth Scroll ── */
+    html { scroll-behavior: smooth; }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      .body-text, .teaser-text, .abstract-text p { font-size: 1.05rem; }
+      .venue-badge { font-size: 1.25rem; padding: 6px 20px; }
     }
   </style>
 
@@ -50,14 +226,13 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700,800|Noto+Sans:400,500,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <!-- <link rel="icon" href="./static/images/logo.png"> -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -86,17 +261,15 @@
     </div>
   </nav>
 
-  <!-- <img src="./static/images/title.png" alt="UNCHA Project Logo" class="logo"> -->
-
   <!-- ===== Hero / Title ===== -->
   <section class="hero">
-    <div class="hero-body">
+    <div class="hero-body" style="padding-bottom: 1.5rem;">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment with Part-to-Whole Semantic Representativeness</h1>
 
-            <div class="is-size-5 publication-authors">
+            <div class="is-size-5 publication-authors" style="margin-top: 1rem;">
               <span class="author-block">
                 <a href="https://janeyeon.github.io">Hayeon Kim</a><sup>1*</sup>,</span>
               <span class="author-block">
@@ -108,16 +281,16 @@
               </span>
             </div>
 
-            <div class="is-size-5 publication-authors">
+            <div class="is-size-5 publication-authors" style="margin-top: 0.5rem;">
               <span class="author-block"><sup>1</sup>Dept. of Electrical and Computer Engineering,</span>
               <span class="author-block"><sup>2</sup>INMC &amp; IPAI</span>
               <br>
               <span class="author-block"><sup>*</sup>These authors contributed equally to this work</span>
-              <h2>Seoul National University, Republic of Korea</h2>
-              <h1><b>CVPR 2026</b></h1>
+              <h2 style="margin-top: 0.3rem;">Seoul National University, Republic of Korea</h2>
+              <span class="venue-text"><b>CVPR 2026</b></span>
             </div>
 
-            <div class="column has-text-centered">
+            <div class="column has-text-centered" style="margin-top: 1rem;">
               <div class="publication-links">
                 <span class="link-block">
                   <a href="https://github.com/jeeit17/UNCHA"
@@ -126,7 +299,6 @@
                     <span>Code</span>
                   </a>
                 </span>
-                <!-- TODO: 링크 추가 후 href 업데이트 -->
                 <span class="link-block">
                   <a href="./static/uncha.pdf"
                     download
@@ -142,13 +314,6 @@
                     <span>arXiv</span>
                   </a>
                 </span>
-                <!-- <span class="link-block">
-                  <a href="#"
-                     class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fab fa-youtube"></i></span>
-                    <span>Video</span>
-                  </a>
-                </span> -->
               </div>
             </div>
 
@@ -161,14 +326,11 @@
   <!-- ===== Teaser ===== -->
   <section class="hero teaser">
     <div class="container is-max-desktop">
-      <div class="hero-body">
-        <!-- <img src="./static/images/motivation_fig.png" alt="UNCHA overview figure"> -->
-        <div class="columns is-vcentered is-centered">
-          <p style="text-align:justify">
-            We present UNCHA, a novel framework for hyperbolic vision-language models that captures part-to-whole semantic representativeness via uncertainty-guided alignment.
-            UNCHA improves hierarchical compositional understanding and achieves state-of-the-art performance on zero-shot classification, retrieval, and multi-label classification benchmarks.
-          </p>
-        </div>
+      <div class="hero-body" style="padding-top: 1rem;">
+        <p class="teaser-text">
+          We present <b>UNCHA</b>, a novel framework for hyperbolic vision-language models that captures part-to-whole semantic representativeness via uncertainty-guided alignment.
+          UNCHA improves hierarchical compositional understanding and achieves state-of-the-art performance on zero-shot classification, retrieval, and multi-label classification benchmarks.
+        </p>
       </div>
     </div>
   </section>
@@ -179,7 +341,8 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
+          <div class="section-divider"></div>
+          <div class="content has-text-justified abstract-text">
             <p>
               While Vision-Language Models (VLMs) have achieved remarkable performance, their Euclidean embeddings remain limited in capturing hierarchical relationships such as part-to-whole or parent-child structures, and often face challenges in multi-object compositional scenarios.
               Hyperbolic VLMs mitigate this issue by better preserving hierarchical structures and modeling part-whole relations (<i>i.e.</i>, whole scene and its part images) through entailment.
@@ -199,20 +362,21 @@
     </div>
   </section>
 
+  <!-- ===== Motivation ===== -->
   <section class="section">
     <div class="container is-max-widescreen">
       <div class="rows">
         <div class="row is-full-width">
           <h2 class="title is-3 has-text-centered">Motivation</h2>
+          <div class="section-divider"></div>
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/motivation_fig.png" class="interpolation-image" alt="Motivation" style="width: 80%;">
           </div>
-          <p style="text-align:justify; font-size: 1.2em;">
+          <p class="body-text">
             <b>Varying representativeness of part images to the whole scene.</b>
             Not all part images equally represent the whole scene. Some parts capture the overall context (e.g., the street), while others correspond to less informative or ambiguous regions (e.g., small objects like traffic signs). As a result, part images differ significantly in how well they reflect the global scene. When all parts are treated equally, the model cannot distinguish more representative regions from less relevant ones, which leads to suboptimal multi-object alignment and inefficient use of the embedding space.
           </p>
-          
-          <p style="text-align:justify; font-size: 1.2em;">
+          <p class="body-text" style="margin-top: 1rem;">
             To address this, we model the representativeness of each part as uncertainty—assigning lower uncertainty to more representative parts and higher uncertainty to less informative ones. This enables uncertainty-aware part–whole alignment, improving compositional understanding and overall alignment quality.
           </p>
         </div>
@@ -221,16 +385,17 @@
   </section>
 
   <!-- ===== Method ===== -->
-  <section class="section">
+  <section class="colored-section">
     <div class="container is-max-widescreen">
       <div class="rows">
         <div class="row is-full-width">
           <h2 class="title is-3 has-text-centered">Method</h2>
+          <div class="section-divider"></div>
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/UNCHA_main_fig_final.png" class="interpolation-image" alt="UNCHA method overview" style="width: 80%;">
           </div>
-          <p style="text-align:justify" style="font-size: 1.2em;">
-            Previous approaches have explored hyperbolic representations to capture hierarchical relationships in vision-language models. For instance, MERU focuses on modeling inter-modal entailment between whole scene images and text representations. HyCoCLIP extends this idea by additionally incorporating intra-modal entailment, enabling alignment between part-level and whole-scene representations within the same modality. 
+          <p class="body-text">
+            Previous approaches have explored hyperbolic representations to capture hierarchical relationships in vision-language models. For instance, MERU focuses on modeling inter-modal entailment between whole scene images and text representations. HyCoCLIP extends this idea by additionally incorporating intra-modal entailment, enabling alignment between part-level and whole-scene representations within the same modality.
             Building on these works, UNCHA further introduces uncertainty to explicitly quantify <b>how well each part represents the whole scene</b>. By assigning lower uncertainty to more representative parts and higher uncertainty to less informative ones, UNCHA enables adaptive weighting in the contrastive objective, leading to more accurate part–whole alignment. In addition, uncertainty is calibrated through the entailment loss, and entropy regularization is applied to ensure stable and balanced utilization of the hyperbolic embedding space across different uncertainty levels and modalities. Together, these components allow UNCHA to achieve more effective compositional understanding and improved alignment performance.
           </p>
         </div>
@@ -244,75 +409,92 @@
       <div class="rows">
         <div class="row is-full-width">
           <h2 class="title is-3 has-text-centered">Results</h2>
+          <div class="section-divider"></div>
 
-          <!-- Table 1: Zero-shot classification -->
-          <div class="columns is-vcentered is-centered">
-            <img src="./static/images/quanti_table_1.png" class="interpolation-image" alt="Zero-shot classification results" style="width: 80%;">
+          <!-- Table 1 -->
+          <div class="result-card">
+            <div class="columns is-vcentered is-centered">
+              <img src="./static/images/quanti_table_1.png" class="interpolation-image" alt="Zero-shot classification results" style="width: 80%;">
+            </div>
+            <p class="body-text">
+              <b>Quantitative results of zero-shot image classification.</b>
+              UNCHA (Ours) consistently outperforms prior approaches across all benchmark datasets, demonstrating generalization and robust performance on downstream tasks.
+              Bold numbers indicate the best performance within each architecture, and $\dagger$ denotes ATMG trained on GRIT.
+            </p>
           </div>
-          <p style="text-align:justify" style="font-size: 1.2em;">
-            <b>Quantitative results of zero-shot image classification.</b>
-            UNCHA (Ours) consistently outperforms prior approaches across all benchmark datasets, demonstrating generalization and robust performance on downstream tasks. 
-            Bold numbers indicate the best performance within each architecture, and $\dagger$ denotes ATMG trained on GRIT.
-          </p>
-          <br><br>
 
-          <!-- Table 2: Retrieval & hierarchical -->
-          <div class="columns is-vcentered is-centered">
-            <img src="./static/images/quanti_table_2.png" class="interpolation-image" alt="Zero-shot retrieval and hierarchical classification results" style="width: 80%;">
+          <!-- Table 2 -->
+          <div class="result-card">
+            <div class="columns is-vcentered is-centered">
+              <img src="./static/images/quanti_table_2.png" class="interpolation-image" alt="Zero-shot retrieval and hierarchical classification results" style="width: 80%;">
+            </div>
+            <p class="body-text">
+              <b>Quantitative results on zero-shot retrieval and hierarchical classification benchmarks.</b>
+              UNCHA (Ours) consistently outperforms prior methods across both retrieval and hierarchical metrics, demonstrating its improved ability to preserve the structural hierarchy of the class labels within the embedding space, partly due to the uncertainty-guided alignment.
+            </p>
           </div>
-          <p style="text-align:justify" style="font-size: 1.2em;">
-           <b>Quantitative results on zero-shot retrieval and hierarchical classification benchmarks.</b> 
-           UNCHA (Ours) consistently outperforms prior methods across both retrieval and hierarchical metrics, demonstrating its improved ability to preserve the structural hierarchy of the class labels within the embedding space, partly due to the uncertainty-guided alignment.
-          </p>
-          <br><br>
 
-          <!-- Table 3: Multi-label -->
-          <div class="columns is-vcentered is-centered">
-            <img src="./static/images/quanti_table_3.png" class="interpolation-image" alt="Multi-label classification results" style="width: 80%;">
+          <!-- Table 3 -->
+          <div class="result-card">
+            <div class="columns is-vcentered is-centered">
+              <img src="./static/images/quanti_table_3.png" class="interpolation-image" alt="Multi-label classification results" style="width: 80%;">
+            </div>
+            <p class="body-text">
+              <b>Quantitative results on multi-object representation and multi-label classification.</b> UNCHA (Ours) consistently achieves higher mAP across varying object configurations and datasets, demonstrating its effectiveness in compositional multi-object understanding.
+              UNCHA outperforms all baselines across both multi-label classification and multi-object representation benchmarks which indicate that our uncertainty-aware modeling provides a substantially stronger compositional understanding.
+              These results highlight UNCHA's ability to better disentangle object-level semantics and maintain robust alignment in complex multi-object scenes.
+            </p>
           </div>
-          <p style="text-align:justify" style="font-size: 1.2em;">
-            <b>Quantitative results on multi-object representation and multi-label classification.</b> UNCHA (Ours) consistently achieves higher mAP across varying object configurations and datasets, demonstrating its effectiveness in compositional multi-object understanding. 
-            UNCHA outperforms all baselines across both multi-label classification and multi-object representation benchmarks which indicate that our uncertainty-aware modeling provides a substantially stronger compositional understanding. 
-            These results highlight UNCHA’s ability to better disentangle object-level semantics and maintain robust alignment in  complex multi-object scenes.
-          </p>
+
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===== Analysis ===== -->
-  <section class="section">
+  <section class="colored-section">
     <div class="container is-max-widescreen">
       <div class="rows">
         <div class="row is-full-width">
-          <h2 class="title is-3 ">Analysis</h2>
+          <h2 class="title is-3 has-text-centered">Analysis</h2>
+          <div class="section-divider"></div>
 
-          <div class="columns is-vcentered is-centered">
-            <img src="./static/images/analysis.png" class="interpolation-image" alt="Uncertainty modeling analysis" style="width: 80%;">
+          <!-- Analysis 1 -->
+          <div class="analysis-block">
+            <div class="columns is-vcentered is-centered">
+              <img src="./static/images/analysis.png" class="interpolation-image" alt="Uncertainty modeling analysis" style="width: 80%;">
+            </div>
+            <p class="body-text">
+              <b>Analysis of uncertainty modeling.</b>
+              (a) Part images are sorted by uncertainty (low to high), where more semantically representative parts exhibit lower uncertainty, while less informative or blurred parts show higher uncertainty.
+              (b) On an ImageNet subset, part-to-whole similarity shows a strong negative correlation with uncertainty ($r = -0.739$), indicating that less representative parts are assigned higher uncertainty.
+            </p>
           </div>
-          <p style="text-align:justify" style="font-size: 1.2em;">
-            <b>Analysis of uncertainty modeling.</b>
-            (a) Part images are sorted by uncertainty (low to high), where more semantically representative parts exhibit lower uncertainty, while less informative or blurred parts show higher uncertainty.
-            (b) On an ImageNet subset, part-to-whole similarity shows a strong negative correlation with uncertainty ($r = -0.739$), indicating that less representative parts are assigned higher uncertainty.
-          </p>
-          <br><br>
 
-          <div class="columns is-vcentered is-centered">
-            <img src="./static/images/analysis2.png" class="interpolation-image" alt="Embedding distribution analysis" style="width: 80%;">
+          <!-- Analysis 2 -->
+          <div class="analysis-block">
+            <div class="columns is-vcentered is-centered">
+              <img src="./static/images/analysis2.png" class="interpolation-image" alt="Embedding distribution analysis" style="width: 80%;">
+            </div>
+            <p class="body-text">
+              <b>Analysis of embedding distribution.</b>
+              (a) Visualization on the COCO val2017 dataset. We compare the embedding distributions of HyCoCLIP and UNCHA using HoroPCA based on their distance from the origin. HyCoCLIP embeddings tend to lie closer to the origin, whereas UNCHA embeddings are positioned farther away in the hyperbolic space. In addition, UNCHA produces a more dispersed distribution with reduced overlap between part and whole representations, indicating more effective utilization of the available hyperbolic space.
+              (b) Visualization of hyperbolic embedding radii for 10,000 ImageNet images and their randomly cropped parts. In HyCoCLIP, embeddings of whole images and their parts tend to collapse into a narrowly concentrated region, resulting in minimal separation. In contrast, UNCHA produces a more structured geometry, where part embeddings lie closer to the origin while whole-scene embeddings are positioned farther away, forming a clear separation between the two. This behavior is driven by uncertainty calibration and entropy regularization, which encourage more meaningful and well-organized representations.
+            </p>
           </div>
-          <p style="text-align:justify" style="font-size: 1.2em;">
-            <b>Analysis of embedding distribution.</b>
-            (a) UNCHA distributes hyperbolic embeddings farther from the origin than HyCoCLIP, enabling more effective use of the hyperbolic space.
-            (b) UNCHA exhibits a more dispersed and structured embedding norm distribution compared to HyCoCLIP, indicating richer space utilization.
-          </p>
-          <div class="columns is-vcentered is-centered">
-            <img src="./static/images/analysis3.jpg" class="interpolation-image" alt="Embedding distribution analysis" style="width: 80%;">
+
+          <!-- Analysis 3 -->
+          <div class="analysis-block">
+            <div class="columns is-vcentered is-centered">
+              <img src="./static/images/analysis3.jpg" class="interpolation-image" alt="Loss analysis" style="width: 80%;">
+            </div>
+            <p class="body-text">
+              <b>Analysis of our newly introduced loss terms.</b>
+              (a) Cosine similarity between gradients of different loss components, showing that the uncertainty calibration loss acts as a regularizer by opposing the entailment loss, while the uncertainty-guided contrastive loss remains aligned with the main contrastive objective.
+              (b) Visualization of embedding distributions using HoroPCA on COCO, where the full model exhibits well-structured representations, while removing each loss term leads to degraded alignment or concentrated embeddings.
+            </p>
           </div>
-          <p style="text-align:justify" style="font-size: 1.2em;">
-            <b>Analysis of our newly introduced loss terms.</b>
-            (a) Cosine similarity between gradients of different loss components, showing that the uncertainty calibration loss acts as a regularizer by opposing the entailment loss, while the uncertainty-guided contrastive loss remains aligned with the main contrastive objective. 
-            (b) Visualization of embedding distributions using HoroPCA on COCO, where the full model exhibits well-structured representations, while removing each loss term leads to degraded alignment or concentrated embeddings.
-          </p>
+
         </div>
       </div>
     </div>
@@ -321,7 +503,8 @@
   <!-- ===== BibTeX ===== -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
+      <h2 class="title is-3 has-text-centered">BibTeX</h2>
+      <div class="section-divider"></div>
       <pre><code>@inproceedings{kim2026uncha,
   author    = {Kim, Hayeon and Jang, Ji Ha and Kim, Junghun James and Chun, Se Young},
   title     = {UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment with Part-to-Whole Semantic Representativeness},
@@ -335,15 +518,15 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <a class="icon-link" href="https://github.com/jeeit17/UNCHA">
+        <a class="icon-link" href="https://github.com/jeeit17/UNCHA" style="color: var(--accent);">
           <i class="fab fa-github"></i>
         </a>
       </div>
       <div class="columns is-centered">
         <div class="column is-8">
-          <div class="content">
+          <div class="content has-text-centered" style="font-size: 0.9rem; color: #9CA3AF;">
             <p>
-              The website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+              The website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io" style="color: var(--accent);">Nerfies</a>.
               If using this template, please provide a link back to their website.
             </p>
           </div>
