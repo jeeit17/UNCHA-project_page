@@ -128,26 +128,27 @@
                 </span>
                 <!-- TODO: 링크 추가 후 href 업데이트 -->
                 <span class="link-block">
-                  <a href="#"
+                  <a href="./static/uncha.pdf"
+                    download
                      class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fas fa-file-pdf"></i></span>
                     <span>Paper</span>
                   </a>
                 </span>
                 <span class="link-block">
-                  <a href="#"
+                  <a href="https://arxiv.org/abs/2603.22042"
                      class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="ai ai-arxiv"></i></span>
                     <span>arXiv</span>
                   </a>
                 </span>
-                <span class="link-block">
+                <!-- <span class="link-block">
                   <a href="#"
                      class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fab fa-youtube"></i></span>
                     <span>Video</span>
                   </a>
-                </span>
+                </span> -->
               </div>
             </div>
 
@@ -191,7 +192,6 @@
               Finally, the uncertainty is further calibrated with an entailment loss regularized by an entropy-based term.
               With the proposed losses, UNCHA learns hyperbolic embeddings with more accurate part-whole ordering, capturing the underlying compositional structure in an image and improving its understanding of complex multi-object scenes.
               UNCHA achieves state-of-the-art performance on zero-shot classification, retrieval, and multi-label classification benchmarks.
-              Our code and models are available at: <a href="https://github.com/jeeit17/UNCHA">https://github.com/jeeit17/UNCHA</a>.
             </p>
           </div>
         </div>
@@ -203,12 +203,17 @@
     <div class="container is-max-widescreen">
       <div class="rows">
         <div class="row is-full-width">
-          <h2 class="title is-3">Motivation</h2>
+          <h2 class="title is-3 has-text-centered">Motivation</h2>
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/motivation_fig.png" class="interpolation-image" alt="Motivation" style="width: 80%;">
           </div>
-          <p style="text-align:justify">
-            Not all parts equally represent the whole scene. Treating them uniformly overlooks semantic representativeness and leads to suboptimal alignment.
+          <p style="text-align:justify; font-size: 1.2em;">
+            <b>Varying representativeness of part images to the whole scene.</b>
+            Not all part images equally represent the whole scene. Some parts capture the overall context (e.g., the street), while others correspond to less informative or ambiguous regions (e.g., small objects like traffic signs). As a result, part images differ significantly in how well they reflect the global scene. When all parts are treated equally, the model cannot distinguish more representative regions from less relevant ones, which leads to suboptimal multi-object alignment and inefficient use of the embedding space.
+          </p>
+          
+          <p style="text-align:justify; font-size: 1.2em;">
+            To address this, we model the representativeness of each part as uncertainty—assigning lower uncertainty to more representative parts and higher uncertainty to less informative ones. This enables uncertainty-aware part–whole alignment, improving compositional understanding and overall alignment quality.
           </p>
         </div>
       </div>
@@ -220,13 +225,13 @@
     <div class="container is-max-widescreen">
       <div class="rows">
         <div class="row is-full-width">
-          <h2 class="title is-3">Method</h2>
+          <h2 class="title is-3 has-text-centered">Method</h2>
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/UNCHA_main_fig_final.png" class="interpolation-image" alt="UNCHA method overview" style="width: 80%;">
           </div>
-          <p style="text-align:justify">
-            Motivated by the fact that not all parts equally represent the whole scene, UNCHA models semantic representativeness through uncertainty.
-            By weighting parts accordingly, it achieves more accurate part-to-whole alignment and improved compositional understanding.
+          <p style="text-align:justify" style="font-size: 1.2em;">
+            Previous approaches have explored hyperbolic representations to capture hierarchical relationships in vision-language models. For instance, MERU focuses on modeling inter-modal entailment between whole scene images and text representations. HyCoCLIP extends this idea by additionally incorporating intra-modal entailment, enabling alignment between part-level and whole-scene representations within the same modality. 
+            Building on these works, UNCHA further introduces uncertainty to explicitly quantify <b>how well each part represents the whole scene</b>. By assigning lower uncertainty to more representative parts and higher uncertainty to less informative ones, UNCHA enables adaptive weighting in the contrastive objective, leading to more accurate part–whole alignment. In addition, uncertainty is calibrated through the entailment loss, and entropy regularization is applied to ensure stable and balanced utilization of the hyperbolic embedding space across different uncertainty levels and modalities. Together, these components allow UNCHA to achieve more effective compositional understanding and improved alignment performance.
           </p>
         </div>
       </div>
@@ -238,15 +243,16 @@
     <div class="container is-max-widescreen">
       <div class="rows">
         <div class="row is-full-width">
-          <h2 class="title is-3">Results</h2>
+          <h2 class="title is-3 has-text-centered">Results</h2>
 
           <!-- Table 1: Zero-shot classification -->
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/quanti_table_1.png" class="interpolation-image" alt="Zero-shot classification results" style="width: 80%;">
           </div>
-          <p style="text-align:justify">
-            Quantitative results of zero-shot image classification.
-            UNCHA (Ours) consistently demonstrates strong performance across both architectures. Bold numbers indicate the best performance within each architecture, and $\dagger$ denotes ATMG trained on GRIT.
+          <p style="text-align:justify" style="font-size: 1.2em;">
+            <b>Quantitative results of zero-shot image classification.</b>
+            UNCHA (Ours) consistently outperforms prior approaches across all benchmark datasets, demonstrating generalization and robust performance on downstream tasks. 
+            Bold numbers indicate the best performance within each architecture, and $\dagger$ denotes ATMG trained on GRIT.
           </p>
           <br><br>
 
@@ -254,8 +260,9 @@
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/quanti_table_2.png" class="interpolation-image" alt="Zero-shot retrieval and hierarchical classification results" style="width: 80%;">
           </div>
-          <p style="text-align:justify">
-            Quantitative results on zero-shot retrieval and hierarchical classification benchmarks. UNCHA (Ours) consistently outperforms prior methods across both retrieval and hierarchical metrics, demonstrating the effectiveness of uncertainty-aware hyperbolic alignment.
+          <p style="text-align:justify" style="font-size: 1.2em;">
+           <b>Quantitative results on zero-shot retrieval and hierarchical classification benchmarks.</b> 
+           UNCHA (Ours) consistently outperforms prior methods across both retrieval and hierarchical metrics, demonstrating its improved ability to preserve the structural hierarchy of the class labels within the embedding space, partly due to the uncertainty-guided alignment.
           </p>
           <br><br>
 
@@ -263,8 +270,10 @@
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/quanti_table_3.png" class="interpolation-image" alt="Multi-label classification results" style="width: 80%;">
           </div>
-          <p style="text-align:justify">
-            Quantitative results on multi-object representation and multi-label classification. UNCHA (Ours) consistently achieves higher mAP across varying object configurations and datasets, demonstrating its effectiveness in compositional multi-object understanding.
+          <p style="text-align:justify" style="font-size: 1.2em;">
+            <b>Quantitative results on multi-object representation and multi-label classification.</b> UNCHA (Ours) consistently achieves higher mAP across varying object configurations and datasets, demonstrating its effectiveness in compositional multi-object understanding. 
+            UNCHA outperforms all baselines across both multi-label classification and multi-object representation benchmarks which indicate that our uncertainty-aware modeling provides a substantially stronger compositional understanding. 
+            These results highlight UNCHA’s ability to better disentangle object-level semantics and maintain robust alignment in  complex multi-object scenes.
           </p>
         </div>
       </div>
@@ -276,13 +285,13 @@
     <div class="container is-max-widescreen">
       <div class="rows">
         <div class="row is-full-width">
-          <h2 class="title is-3">Analysis</h2>
+          <h2 class="title is-3 ">Analysis</h2>
 
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/analysis.png" class="interpolation-image" alt="Uncertainty modeling analysis" style="width: 80%;">
           </div>
-          <p style="text-align:justify">
-            Analysis of uncertainty modeling.
+          <p style="text-align:justify" style="font-size: 1.2em;">
+            <b>Analysis of uncertainty modeling.</b>
             (a) Part images are sorted by uncertainty (low to high), where more semantically representative parts exhibit lower uncertainty, while less informative or blurred parts show higher uncertainty.
             (b) On an ImageNet subset, part-to-whole similarity shows a strong negative correlation with uncertainty ($r = -0.739$), indicating that less representative parts are assigned higher uncertainty.
           </p>
@@ -291,9 +300,18 @@
           <div class="columns is-vcentered is-centered">
             <img src="./static/images/analysis2.png" class="interpolation-image" alt="Embedding distribution analysis" style="width: 80%;">
           </div>
-          <p style="text-align:justify">
+          <p style="text-align:justify" style="font-size: 1.2em;">
+            <b>Analysis of embedding distribution.</b>
             (a) UNCHA distributes hyperbolic embeddings farther from the origin than HyCoCLIP, enabling more effective use of the hyperbolic space.
             (b) UNCHA exhibits a more dispersed and structured embedding norm distribution compared to HyCoCLIP, indicating richer space utilization.
+          </p>
+          <div class="columns is-vcentered is-centered">
+            <img src="./static/images/analysis3.jpg" class="interpolation-image" alt="Embedding distribution analysis" style="width: 80%;">
+          </div>
+          <p style="text-align:justify" style="font-size: 1.2em;">
+            <b>Analysis of our newly introduced loss terms.</b>
+            (a) Cosine similarity between gradients of different loss components, showing that the uncertainty calibration loss acts as a regularizer by opposing the entailment loss, while the uncertainty-guided contrastive loss remains aligned with the main contrastive objective. 
+            (b) Visualization of embedding distributions using HoroPCA on COCO, where the full model exhibits well-structured representations, while removing each loss term leads to degraded alignment or concentrated embeddings.
           </p>
         </div>
       </div>
